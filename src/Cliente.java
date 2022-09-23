@@ -6,7 +6,7 @@ public class Cliente {
     private LocalDate dataDeNascimento;
     private Object endereco; // Declaramos um variavel do tipo object pelo fato dela receber varios valores.
 
-    public Cliente(String nome,String cpf, LocalDate dataDeNascimento, Object endereco ){ // Criando o metudo contrutor 
+    public Cliente(String nome, String cpf, LocalDate dataDeNascimento, Object endereco){ // Criando o metudo contrutor 
         this.nome = nome;
         this.cpf = cpf;
         this.dataDeNascimento = dataDeNascimento;

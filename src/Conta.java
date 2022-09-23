@@ -1,10 +1,10 @@
 public class Conta {
     private String numeroDeAgencia;
     private String numeroDeConta;
-    private float saldo;
+    private double saldo;
     private Cliente cliente;
 
-    public Conta(String numeroDeAgencia, String numeroDeConta, float saldo, Cliente cliente) {
+    public Conta(String numeroDeAgencia, String numeroDeConta, double saldo, Cliente cliente) {
         this.numeroDeAgencia = numeroDeAgencia;
         this.numeroDeConta = numeroDeConta;
         this.saldo = saldo;
@@ -19,7 +19,7 @@ public class Conta {
         return numeroDeConta;
     }
 
-    public float getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
@@ -27,15 +27,15 @@ public class Conta {
         return cliente;
     }
 
-    public void sacar(float valor) {
+    public void sacar(double valor) {
         this.saldo -= valor;
     }
 
-    public void depositar(float valor) {
+    public void depositar(double valor) {
         this.saldo += valor;
     }
 
-    public void transferir(Conta conta, float valor) {
+    public void transferir(Conta conta, double valor) {
         this.saldo -= valor;
         conta.saldo += valor;
     }
