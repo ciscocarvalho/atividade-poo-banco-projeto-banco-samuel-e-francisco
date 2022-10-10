@@ -1,13 +1,12 @@
 public class Conta {
     private String numeroDeAgencia;
     private String numeroDeConta;
-    private double saldo;
+    private double saldo = 0;
     private Cliente cliente;
 
-    public Conta(String numeroDeAgencia, String numeroDeConta, double saldo, Cliente cliente) {
+    public Conta(String numeroDeAgencia, String numeroDeConta, Cliente cliente) {
         this.numeroDeAgencia = numeroDeAgencia;
         this.numeroDeConta = numeroDeConta;
-        this.saldo = saldo;
         this.cliente = cliente;
     }
 
