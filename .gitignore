@@ -1,2 +1,4 @@
 bin/
 *.class
+# Pasta gerada automaticamente pelo maven
+target/
