@@ -10,12 +10,18 @@ public class Cliente {
     private LocalDate dataDeNascimento;
     private Object endereco; // Declaramos um variavel do tipo object pelo fato dela receber varios valores.
     private List<Conta> contas = new ArrayList<>();
+    private String email;
 
-    public Cliente(String nome, String cpf, LocalDate dataDeNascimento, Object endereco){ // Criando o método contrutor 
+    public Cliente(String nome, String cpf, LocalDate dataDeNascimento, Object endereco) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataDeNascimento = dataDeNascimento;
         this.endereco = endereco;
+    }
+
+    public Cliente(String nome, String cpf, LocalDate dataDeNascimento, Object endereco, String email) {
+        this(nome, cpf, dataDeNascimento, endereco);
+        this.email = email;
     }
 
     public Conta criarConta(String numeroDeAgencia, String numeroDeConta) {
@@ -36,7 +42,7 @@ public class Cliente {
         return this.cpf;
     } 
 
-    public LocalDate  getDataDeNacimento(){
+    public LocalDate getDataDeNacimento() {
         return this.dataDeNascimento;
     }
 
@@ -63,5 +69,9 @@ public class Cliente {
         }
 
         return conta;
+    }
+
+    public String getEmail() {
+        return this.email;
     }
 }

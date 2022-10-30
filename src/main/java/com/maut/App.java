@@ -31,6 +31,7 @@ public class App {
             String cpf;
             LocalDate dataDeNascimento;
             Object endereco;
+            String email;
 
             switch (opcaoSelecionada) {
                 case "Criar Cadastro":
@@ -38,8 +39,15 @@ public class App {
                     cpf = JOptionPane.showInputDialog("CPF");
                     dataDeNascimento = LocalDate.parse(JOptionPane.showInputDialog("Data de nascimento"));
                     endereco = JOptionPane.showInputDialog("Endereço");
+                    email = JOptionPane.showInputDialog("Email (deixe em branco se deseja não informar)");
 
-                    cliente = new Cliente(nome, cpf, dataDeNascimento, endereco);
+                    if (email.isBlank()) {
+                        cliente = new Cliente(nome, cpf, dataDeNascimento, endereco);
+                    } else {
+                        cliente = new Cliente(nome, cpf, dataDeNascimento, endereco, email);
+                        notificacaoEmail = new Email(cliente, mautEmail, mautSenha, "Banco Maut");
+                    }
+
                     clientes.add(cliente);
                     continuar = false;
 
