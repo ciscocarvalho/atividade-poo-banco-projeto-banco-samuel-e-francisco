@@ -8,18 +8,18 @@ public class Cliente {
     private String nome;
     private String cpf;
     private LocalDate dataNascimento;
-    private Object endereco; // Declaramos um variavel do tipo object pelo fato dela receber varios valores.
+    private Endereco endereco;
     private List<Conta> contas = new ArrayList<>();
     private String email;
 
-    public Cliente(String nome, String cpf, LocalDate dataNascimento, Object endereco) {
+    public Cliente(String nome, String cpf, LocalDate dataNascimento, Endereco endereco) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
         this.endereco = endereco;
     }
 
-    public Cliente(String nome, String cpf, LocalDate dataNascimento, Object endereco, String email) {
+    public Cliente(String nome, String cpf, LocalDate dataNascimento, Endereco endereco, String email) {
         this(nome, cpf, dataNascimento, endereco);
         this.email = email;
     }
@@ -47,11 +47,11 @@ public class Cliente {
         return this.dataNascimento;
     }
 
-    public void setEndereco(Object endereco){
+    public void setEndereco(Endereco endereco){
         this.endereco = endereco;
     }
 
-    public Object getEndereco(){
+    public Endereco getEndereco(){
         return this.endereco;
     }
 

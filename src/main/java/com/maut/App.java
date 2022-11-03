@@ -2,11 +2,14 @@ package com.maut;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
+
 import javax.swing.JOptionPane;
+
 import com.maut.Entidades.Cliente;
 import com.maut.Entidades.Conta;
+import com.maut.Entidades.Endereco;
 
 public class App {
     private static List<Cliente> clientes = new ArrayList<>();
@@ -32,7 +35,7 @@ public class App {
             String nome;
             String cpf;
             LocalDate dataNascimento;
-            Object endereco;
+            Endereco endereco;
             String email;
 
             switch (opcaoSelecionada) {
@@ -40,7 +43,12 @@ public class App {
                     nome = JOptionPane.showInputDialog("Nome");
                     cpf = JOptionPane.showInputDialog("CPF");
                     dataNascimento = LocalDate.parse(JOptionPane.showInputDialog("Data de nascimento"));
-                    endereco = JOptionPane.showInputDialog("Endereço");
+                    String logradouro = JOptionPane.showInputDialog("Endereco (logradouro)");
+                    int numero = Integer.parseInt(JOptionPane.showInputDialog("Endereco (Numero)"));
+                    String bairro = JOptionPane.showInputDialog("Endereco (Bairro)");
+                    String cidade = JOptionPane.showInputDialog("Endereco (Cidade)");
+                    String uf = JOptionPane.showInputDialog("Endereco (UF)");
+                    endereco = new Endereco(logradouro, numero, bairro, cidade, uf);
                     email = JOptionPane.showInputDialog("Email (deixe em branco se deseja não informar)");
 
                     if (email.isBlank()) {
