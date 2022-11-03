@@ -5,18 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
-import com.maut.Notificacao.Email;
-import io.github.cdimascio.dotenv.Dotenv;
 
 public class App {
     private static List<Cliente> clientes = new ArrayList<>();
     private static List<Conta> contas = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
-        Dotenv dotenv = Dotenv.load();
-        String mautEmail = dotenv.get("MAUT_EMAIL");
-        String mautSenha = dotenv.get("MAUT_SENHA");
-
         List<String> opcoes = new ArrayList<>(
             Arrays.asList(
                 "Criar Cadastro",
@@ -29,8 +23,6 @@ public class App {
         String opcaoSelecionada;
         Cliente cliente = null;
         boolean continuar = true;
-
-        Email notificacaoEmail = null;
 
         while (continuar) {
             opcaoSelecionada = exibeMenu(opcoes, mensagemPadrao);
@@ -53,7 +45,6 @@ public class App {
                         cliente = new Cliente(nome, cpf, dataDeNascimento, endereco);
                     } else {
                         cliente = new Cliente(nome, cpf, dataDeNascimento, endereco, email);
-                        notificacaoEmail = new Email(cliente, mautEmail, mautSenha, "Banco Maut");
                     }
 
                     clientes.add(cliente);
@@ -147,10 +138,6 @@ public class App {
                 case "Depositar":
                     valor = Double.parseDouble(JOptionPane.showInputDialog("Valor:"));
                     conta.depositar(valor);
-
-                    if (notificacaoEmail != null) {
-                        notificacaoEmail.enviar("Depósito", valor);
-                    }
                     break;
                 case "Transferir":
                     numeroDeAgencia = JOptionPane.showInputDialog("Numero de Agência");
@@ -170,20 +157,12 @@ public class App {
                     } else {
                         valor = Double.parseDouble(JOptionPane.showInputDialog("Valor:"));
                         conta.transferir(conta, valor);
-
-                        if (notificacaoEmail != null) {
-                            notificacaoEmail.enviar("Transferência", valor);
-                        }
                     }
 
                     break;
                 case "Sacar":
                     valor = Double.parseDouble(JOptionPane.showInputDialog("Valor:"));
                     conta.sacar(valor);
-
-                    if (notificacaoEmail != null) {
-                        notificacaoEmail.enviar("Saque", valor);
-                    }
                     break;
                 case "Encerrar":
                     return;
