@@ -29,7 +29,7 @@ public class App {
 
             String nome;
             String cpf;
-            LocalDate dataDeNascimento;
+            LocalDate dataNascimento;
             Object endereco;
             String email;
 
@@ -37,14 +37,14 @@ public class App {
                 case "Criar Cadastro":
                     nome = JOptionPane.showInputDialog("Nome");
                     cpf = JOptionPane.showInputDialog("CPF");
-                    dataDeNascimento = LocalDate.parse(JOptionPane.showInputDialog("Data de nascimento"));
+                    dataNascimento = LocalDate.parse(JOptionPane.showInputDialog("Data de nascimento"));
                     endereco = JOptionPane.showInputDialog("Endereço");
                     email = JOptionPane.showInputDialog("Email (deixe em branco se deseja não informar)");
 
                     if (email.isBlank()) {
-                        cliente = new Cliente(nome, cpf, dataDeNascimento, endereco);
+                        cliente = new Cliente(nome, cpf, dataNascimento, endereco);
                     } else {
-                        cliente = new Cliente(nome, cpf, dataDeNascimento, endereco, email);
+                        cliente = new Cliente(nome, cpf, dataNascimento, endereco, email);
                     }
 
                     clientes.add(cliente);
@@ -82,8 +82,8 @@ public class App {
         );
 
         Conta conta = null;
-        int numeroDeConta;
-        int numeroDeAgencia;
+        int numeroConta;
+        int numeroAgencia;
 
         while (conta == null) {
             opcaoSelecionada = exibeMenu(opcoes, mensagemPadrao);
@@ -92,18 +92,18 @@ public class App {
                 case "Criar Conta":
                     // TODO: Melhorar isto
                     int contasSize = contas.size() + 1;
-                    numeroDeConta = contasSize;
-                    numeroDeAgencia = contasSize * 10;
-                    conta = cliente.criarConta(numeroDeAgencia, numeroDeConta);
-                    String mensagem = "Número de Conta: " + numeroDeConta +
-                                        "\nNúmero de Agência: " + numeroDeAgencia;
+                    numeroConta = contasSize;
+                    numeroAgencia = contasSize * 10;
+                    conta = cliente.criaConta(numeroAgencia, numeroConta);
+                    String mensagem = "Número de Conta: " + numeroConta +
+                                        "\nNúmero de Agência: " + numeroAgencia;
                     JOptionPane.showMessageDialog(null, mensagem);
 
                     break;
                 case "Acessar conta":
-                    numeroDeConta = Integer.parseInt(JOptionPane.showInputDialog("Numero de Conta"));
-                    numeroDeAgencia = Integer.parseInt(JOptionPane.showInputDialog("Numero de Agência"));
-                    conta = cliente.getConta(numeroDeConta, numeroDeAgencia);
+                    numeroConta = Integer.parseInt(JOptionPane.showInputDialog("Numero de Conta"));
+                    numeroAgencia = Integer.parseInt(JOptionPane.showInputDialog("Numero de Agência"));
+                    conta = cliente.getConta(numeroConta, numeroAgencia);
 
                     if (conta == null) {
                         JOptionPane.showMessageDialog(null, "Você não possui conta com os dados informados, tente novamente");
@@ -137,32 +137,32 @@ public class App {
                     break;
                 case "Depositar":
                     valor = Double.parseDouble(JOptionPane.showInputDialog("Valor:"));
-                    conta.depositar(valor);
+                    conta.deposita(valor);
                     break;
                 case "Transferir":
-                    numeroDeAgencia = Integer.parseInt(JOptionPane.showInputDialog("Numero de Agência"));
-                    numeroDeConta = Integer.parseInt(JOptionPane.showInputDialog("Numero de Conta"));
+                    numeroAgencia = Integer.parseInt(JOptionPane.showInputDialog("Numero de Agência"));
+                    numeroConta = Integer.parseInt(JOptionPane.showInputDialog("Numero de Conta"));
 
-                    Conta contaRecebedora = null;
+                    Conta contaDestino = null;
 
                     for (Conta c : contas) {
-                        if (c.getNumeroDeAgencia() == numeroDeAgencia && c.getNumeroDeConta() == numeroDeConta) {
-                            contaRecebedora = c;
+                        if (c.getAgencia() == numeroAgencia && c.getConta() == numeroConta) {
+                            contaDestino = c;
                             break;
                         }
                     }
 
-                    if (contaRecebedora == null) {
+                    if (contaDestino == null) {
                         JOptionPane.showMessageDialog(null, "Não existe conta com os dados informados, tente novamente");
                     } else {
                         valor = Double.parseDouble(JOptionPane.showInputDialog("Valor:"));
-                        conta.transferir(conta, valor);
+                        conta.transfere(conta, valor);
                     }
 
                     break;
                 case "Sacar":
                     valor = Double.parseDouble(JOptionPane.showInputDialog("Valor:"));
-                    conta.sacar(valor);
+                    conta.saca(valor);
                     break;
                 case "Encerrar":
                     return;

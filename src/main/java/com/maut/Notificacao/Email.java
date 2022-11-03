@@ -39,7 +39,7 @@ public class Email implements Notificacao {
         this.fromNome = nome;
     }
 
-    public void enviar(String operacao, double valor) {
+    public void enviaNotificacao(String operacao, double valor) {
         String destinatario = this.cliente.getEmail();
         String assunto = operacao;
         String mensagem = "A operação foi realizada com valor: " + valor;
