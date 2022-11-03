@@ -3,13 +3,13 @@ import com.maut.Notificacao.Email;
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class Conta {
-    private String numeroDeAgencia;
-    private String numeroDeConta;
+    private int numeroDeAgencia;
+    private int numeroDeConta;
     private double saldo = 0;
     private Email notificacaoEmail = null;
     private Cliente cliente;
 
-    public Conta(String numeroDeAgencia, String numeroDeConta, Cliente cliente) {
+    public Conta(int numeroDeAgencia, int numeroDeConta, Cliente cliente) {
         this.numeroDeAgencia = numeroDeAgencia;
         this.numeroDeConta = numeroDeConta;
         this.cliente = cliente;
@@ -22,11 +22,11 @@ public class Conta {
         }
     }
 
-    public String getNumeroDeAgencia() {
+    public int getNumeroDeAgencia() {
         return numeroDeAgencia;
     }
 
-    public String getNumeroDeConta() {
+    public int getNumeroDeConta() {
         return numeroDeConta;
     }
 

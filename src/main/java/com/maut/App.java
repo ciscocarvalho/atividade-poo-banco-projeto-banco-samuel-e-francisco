@@ -82,8 +82,8 @@ public class App {
         );
 
         Conta conta = null;
-        String numeroDeConta;
-        String numeroDeAgencia;
+        int numeroDeConta;
+        int numeroDeAgencia;
 
         while (conta == null) {
             opcaoSelecionada = exibeMenu(opcoes, mensagemPadrao);
@@ -92,8 +92,8 @@ public class App {
                 case "Criar Conta":
                     // TODO: Melhorar isto
                     int contasSize = contas.size() + 1;
-                    numeroDeConta = Integer.toString(contasSize);
-                    numeroDeAgencia = Integer.toString(contasSize * 10);
+                    numeroDeConta = contasSize;
+                    numeroDeAgencia = contasSize * 10;
                     conta = cliente.criarConta(numeroDeAgencia, numeroDeConta);
                     String mensagem = "Número de Conta: " + numeroDeConta +
                                         "\nNúmero de Agência: " + numeroDeAgencia;
@@ -101,8 +101,8 @@ public class App {
 
                     break;
                 case "Acessar conta":
-                    numeroDeConta = JOptionPane.showInputDialog("Numero de Conta");
-                    numeroDeAgencia = JOptionPane.showInputDialog("Numero de Agência");
+                    numeroDeConta = Integer.parseInt(JOptionPane.showInputDialog("Numero de Conta"));
+                    numeroDeAgencia = Integer.parseInt(JOptionPane.showInputDialog("Numero de Agência"));
                     conta = cliente.getConta(numeroDeConta, numeroDeAgencia);
 
                     if (conta == null) {
@@ -140,8 +140,8 @@ public class App {
                     conta.depositar(valor);
                     break;
                 case "Transferir":
-                    numeroDeAgencia = JOptionPane.showInputDialog("Numero de Agência");
-                    numeroDeConta = JOptionPane.showInputDialog("Numero de Conta");
+                    numeroDeAgencia = Integer.parseInt(JOptionPane.showInputDialog("Numero de Agência"));
+                    numeroDeConta = Integer.parseInt(JOptionPane.showInputDialog("Numero de Conta"));
 
                     Conta contaRecebedora = null;
 

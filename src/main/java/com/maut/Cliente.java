@@ -24,7 +24,7 @@ public class Cliente {
         this.email = email;
     }
 
-    public Conta criarConta(String numeroDeAgencia, String numeroDeConta) {
+    public Conta criarConta(int numeroDeAgencia, int numeroDeConta) {
         Conta conta = new Conta(numeroDeAgencia, numeroDeConta, this);
         contas.add(conta);
         return conta;
@@ -58,7 +58,7 @@ public class Cliente {
         return this.contas;
     }
 
-    public Conta getConta(String numeroDeConta, String numeroDeAgencia){
+    public Conta getConta(int numeroDeConta, int numeroDeAgencia){
         Conta conta = null;
 
         for (Conta c : this.contas) {
