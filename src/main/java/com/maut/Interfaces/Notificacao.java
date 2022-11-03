@@ -1,4 +1,4 @@
-package com.maut.Notificacao;
+package com.maut.Interfaces;
 
 public interface Notificacao {
     public void enviaNotificacao(String operacao, double valor);

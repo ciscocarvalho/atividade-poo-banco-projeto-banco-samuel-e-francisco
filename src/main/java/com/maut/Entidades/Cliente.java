@@ -1,4 +1,4 @@
-package com.maut;
+package com.maut.Entidades;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

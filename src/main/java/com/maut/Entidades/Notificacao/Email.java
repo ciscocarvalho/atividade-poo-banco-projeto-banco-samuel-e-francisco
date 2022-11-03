@@ -1,11 +1,12 @@
-package com.maut.Notificacao;
+package com.maut.Entidades.Notificacao;
 
 import java.util.Properties;
 import javax.mail.Session;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
-import com.maut.Cliente;
+import com.maut.Entidades.Cliente;
+import com.maut.Interfaces.Notificacao;
 
 public class Email implements Notificacao {
     private String fromEmail;

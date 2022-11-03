@@ -1,5 +1,6 @@
-package com.maut;
-import com.maut.Notificacao.Email;
+package com.maut.Entidades;
+
+import com.maut.Entidades.Notificacao.Email;
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class Conta {

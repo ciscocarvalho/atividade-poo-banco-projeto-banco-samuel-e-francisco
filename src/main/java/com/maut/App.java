@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
+import com.maut.Entidades.Cliente;
+import com.maut.Entidades.Conta;
 
 public class App {
     private static List<Cliente> clientes = new ArrayList<>();
