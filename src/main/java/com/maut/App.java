@@ -16,6 +16,23 @@ public class App {
     private static List<Conta> contas = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
+        Cliente cliente = menuCliente();
+
+        if (cliente == null) {
+            return;
+        }
+
+        Conta conta = menuConta(cliente);
+
+        if (conta == null) {
+            return;
+        }
+
+        menuOpcoesConta(conta);
+    }
+
+    private static Cliente menuCliente() {
+        String mensagem = "O que deseja fazer?";
         List<String> opcoes = new ArrayList<>(
             Arrays.asList(
                 "Criar Cadastro",
@@ -23,20 +40,16 @@ public class App {
                 "Encerrar"
             )
         );
-
-        String mensagemPadrao = "O que deseja fazer?";
         String opcaoSelecionada;
         Cliente cliente = null;
-        boolean continuar = true;
+        String nome;
+        String cpf;
+        LocalDate dataNascimento;
+        Endereco endereco;
+        String email;
 
-        while (continuar) {
-            opcaoSelecionada = exibeMenu(opcoes, mensagemPadrao);
-
-            String nome;
-            String cpf;
-            LocalDate dataNascimento;
-            Endereco endereco;
-            String email;
+        while (true) {
+            opcaoSelecionada = exibeMenu(opcoes, mensagem);
 
             switch (opcaoSelecionada) {
                 case "Criar Cadastro":
@@ -58,18 +71,15 @@ public class App {
                     }
 
                     clientes.add(cliente);
-                    continuar = false;
-
-                    break;
+                    return cliente;
                 case "Acessar Cadastro":
                     nome = JOptionPane.showInputDialog("Nome");
                     cpf = JOptionPane.showInputDialog("CPF");
 
                     for (Cliente clienteCadastrado : clientes) {
-                        if (clienteCadastrado.getCpf() == cpf) {
+                        if (clienteCadastrado.getCpf().equals(cpf)) {
                             cliente = clienteCadastrado;
-                            continuar = false;
-                            break;
+                            return cliente;
                         }
                     }
 
@@ -77,26 +87,29 @@ public class App {
 
                     break;
                 case "Encerrar":
-                    return;
+                    return null;
             }
         }
+    }
 
-        mensagemPadrao = cliente.getNome() + ", o que deseja fazer?";
-
-        opcoes = new ArrayList<>(
+    private static Conta menuConta(Cliente cliente) {
+        String mensagem = cliente.getNome() + ", o que deseja fazer?";
+        Conta conta = null;
+        String opcaoSelecionada;
+        List<String> opcoes = new ArrayList<>(
             Arrays.asList(
                 "Criar Conta",
                 "Acessar conta",
+                "Voltar",
                 "Encerrar"
             )
         );
 
-        Conta conta = null;
         int numeroConta;
         int numeroAgencia;
 
-        while (conta == null) {
-            opcaoSelecionada = exibeMenu(opcoes, mensagemPadrao);
+        while (true) {
+            opcaoSelecionada = exibeMenu(opcoes, mensagem);
 
             switch (opcaoSelecionada) {
                 case "Criar Conta":
@@ -105,11 +118,11 @@ public class App {
                     numeroConta = contasSize;
                     numeroAgencia = contasSize * 10;
                     conta = cliente.criaConta(numeroAgencia, numeroConta);
-                    String mensagem = "Número de Conta: " + numeroConta +
-                                        "\nNúmero de Agência: " + numeroAgencia;
-                    JOptionPane.showMessageDialog(null, mensagem);
-
-                    break;
+                    contas.add(conta);
+                    JOptionPane.showMessageDialog(
+                        null, "Número de Conta: " + numeroConta + "\nNúmero de Agência: " + numeroAgencia
+                    );
+                    return conta;
                 case "Acessar conta":
                     numeroConta = Integer.parseInt(JOptionPane.showInputDialog("Numero de Conta"));
                     numeroAgencia = Integer.parseInt(JOptionPane.showInputDialog("Numero de Agência"));
@@ -117,28 +130,38 @@ public class App {
 
                     if (conta == null) {
                         JOptionPane.showMessageDialog(null, "Você não possui conta com os dados informados, tente novamente");
+                    } else {
+                        return conta;
+                    }
+
+                    break;
+                case "Voltar":
+                    cliente = menuCliente();
+
+                    if (cliente == null) {
+                        return null;
                     }
 
                     break;
                 case "Encerrar":
-                    return;
+                    return null;
             }
         }
+    }
 
-        opcoes = new ArrayList<>(
-            Arrays.asList(
-                "Ver saldo",
-                "Depositar",
-                "Transferir",
-                "Sacar",
-                "Encerrar"
-            )
+    private static void menuOpcoesConta(Conta conta) {
+        String mensagem = conta.getCliente().getNome() + ", o que deseja fazer?";
+        List<String> opcoes = new ArrayList<String>(
+            Arrays.asList("Ver saldo", "Depositar", "Transferir", "Sacar", "Voltar", "Encerrar")
         );
 
+        String opcaoSelecionada;
         double valor;
+        int numeroConta;
+        int numeroAgencia;
 
         while (true) {
-            opcaoSelecionada = exibeMenu(opcoes, mensagemPadrao);
+            opcaoSelecionada = exibeMenu(opcoes, mensagem);
 
             switch (opcaoSelecionada) {
                 case "Ver saldo":
@@ -173,6 +196,14 @@ public class App {
                 case "Sacar":
                     valor = Double.parseDouble(JOptionPane.showInputDialog("Valor:"));
                     conta.saca(valor);
+                    break;
+                case "Voltar":
+                    conta = menuConta(conta.getCliente());
+
+                    if (conta == null) {
+                        return;
+                    }
+
                     break;
                 case "Encerrar":
                     return;
