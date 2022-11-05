@@ -1,6 +1,7 @@
 package com.maut;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,7 +56,10 @@ public class App {
                 case "Criar Cadastro":
                     nome = JOptionPane.showInputDialog("Nome");
                     cpf = JOptionPane.showInputDialog("CPF");
-                    dataNascimento = LocalDate.parse(JOptionPane.showInputDialog("Data de nascimento"));
+                    dataNascimento = LocalDate.parse(
+                        JOptionPane.showInputDialog("Data de nascimento (formato: DD/MM/AAAA)"),
+                        DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                    );
                     String logradouro = JOptionPane.showInputDialog("Endereco (logradouro)");
                     int numero = Integer.parseInt(JOptionPane.showInputDialog("Endereco (Numero)"));
                     String bairro = JOptionPane.showInputDialog("Endereco (Bairro)");
