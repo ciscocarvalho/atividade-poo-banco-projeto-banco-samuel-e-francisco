@@ -39,7 +39,14 @@ public class Conta {
         return cliente;
     }
 
-    public void saca(double valor) {
+    private boolean podeRetirar(double valor) {
+        return this.saldo - valor > 0;
+    }
+
+    public void saca(double valor) throws IllegalArgumentException {
+        if (!this.podeRetirar(valor)) {
+            throw new IllegalArgumentException("Valor invalido para saque");
+        }
         this.saldo -= valor;
         this.enviaNotificacao("Saque", valor);
     }
@@ -49,7 +56,10 @@ public class Conta {
         this.enviaNotificacao("Depósito", valor);
     }
 
-    public void transfere(Conta contaDestino, double valor) {
+    public void transfere(Conta contaDestino, double valor) throws IllegalArgumentException {
+        if (!this.podeRetirar(valor)) {
+            throw new IllegalArgumentException("Valor invalido para saque");
+        }
         this.saldo -= valor;
         contaDestino.saldo += valor;
         this.enviaNotificacao("Transferência", valor);

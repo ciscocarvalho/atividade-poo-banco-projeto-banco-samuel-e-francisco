@@ -188,14 +188,29 @@ public class App {
                     if (contaDestino == null) {
                         JOptionPane.showMessageDialog(null, "Não existe conta com os dados informados, tente novamente");
                     } else {
-                        valor = Double.parseDouble(JOptionPane.showInputDialog("Valor:"));
-                        conta.transfere(conta, valor);
+                        while (true) {
+                            try {
+                                valor = Double.parseDouble(JOptionPane.showInputDialog("Valor:"));
+                                conta.transfere(conta, valor);
+                                break;
+                            } catch (IllegalArgumentException e) {
+                                JOptionPane.showMessageDialog(null, "Valor invalido para transferencia, voce possui saldo suficiente?");
+                            }
+                        }
                     }
 
                     break;
                 case "Sacar":
-                    valor = Double.parseDouble(JOptionPane.showInputDialog("Valor:"));
-                    conta.saca(valor);
+                    while (true) {
+                        valor = Double.parseDouble(JOptionPane.showInputDialog("Valor:"));
+
+                        try {
+                            conta.saca(valor);
+                            break;
+                        } catch (IllegalArgumentException e) {
+                            JOptionPane.showMessageDialog(null, "Valor invalido para saque, voce possui saldo suficiente?");
+                        }
+                    }
                     break;
                 case "Voltar":
                     conta = menuConta(conta.getCliente());
