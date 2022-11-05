@@ -9,8 +9,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import com.maut.Entidades.Cliente;
-import com.maut.Entidades.Conta;
 import com.maut.Entidades.Endereco;
+import com.maut.Entidades.Conta.Conta;
 
 public class App {
     private static List<Cliente> clientes = new ArrayList<>();
@@ -117,11 +117,13 @@ public class App {
 
             switch (opcaoSelecionada) {
                 case "Criar Conta":
+                    String tipoConta = exibeMenu(Arrays.asList("Poupanca", "Corrente"), "Tipo de conta");
+
                     // TODO: Melhorar isto
                     int contasSize = contas.size() + 1;
                     numeroConta = contasSize;
                     numeroAgencia = contasSize * 10;
-                    conta = cliente.criaConta(numeroAgencia, numeroConta);
+                    conta = cliente.criaConta(numeroAgencia, numeroConta, tipoConta);
                     contas.add(conta);
                     JOptionPane.showMessageDialog(
                         null, "Número de Conta: " + numeroConta + "\nNúmero de Agência: " + numeroAgencia

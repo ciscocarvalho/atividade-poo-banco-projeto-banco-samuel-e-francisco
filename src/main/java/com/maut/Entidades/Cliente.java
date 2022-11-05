@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.maut.Entidades.Conta.Conta;
+import com.maut.Entidades.Conta.Corrente;
+import com.maut.Entidades.Conta.Poupanca;
+
 public class Cliente {
     private String nome;
     private String cpf;
@@ -24,9 +28,15 @@ public class Cliente {
         this.email = email;
     }
 
-    public Conta criaConta(int agencia, int conta) {
-        // nomear essa variavel "conta" aparentemente buga o intellisense
-        Conta _conta = new Conta(agencia, conta, this);
+    public Conta criaConta(int agencia, int conta, String tipo) {
+        Conta _conta;
+
+        if (tipo.equalsIgnoreCase("poupanca")) {
+            _conta = new Poupanca(agencia, conta, this);
+        } else {
+            _conta = new Corrente(agencia, conta, this);
+        }
+
         contas.add(_conta);
         return _conta;
     }
@@ -41,7 +51,7 @@ public class Cliente {
 
     public String getCpf(){
         return this.cpf;
-    } 
+    }
 
     public LocalDate getDataNascimento() {
         return this.dataNascimento;

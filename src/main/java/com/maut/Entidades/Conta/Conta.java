@@ -1,12 +1,13 @@
-package com.maut.Entidades;
+package com.maut.Entidades.Conta;
 
+import com.maut.Entidades.Cliente;
 import com.maut.Entidades.Notificacao.Email;
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class Conta {
     private int agencia;
     private int conta;
-    private double saldo = 0;
+    protected double saldo = 0;
     private Email notificacaoEmail = null;
     private Cliente cliente;
 
@@ -39,7 +40,7 @@ public class Conta {
         return cliente;
     }
 
-    private boolean podeRetirar(double valor) {
+    protected boolean podeRetirar(double valor) {
         return this.saldo - valor > 0;
     }
 
@@ -58,14 +59,14 @@ public class Conta {
 
     public void transfere(Conta contaDestino, double valor) throws IllegalArgumentException {
         if (!this.podeRetirar(valor)) {
-            throw new IllegalArgumentException("Valor invalido para saque");
+            throw new IllegalArgumentException("Valor invalido para transferencia");
         }
         this.saldo -= valor;
         contaDestino.deposita(valor);
         this.enviaNotificacao("Transferência", valor);
     }
 
-    private void enviaNotificacao(String operacao, double valor) {
+    protected void enviaNotificacao(String operacao, double valor) {
         if (notificacaoEmail != null) {
             notificacaoEmail.enviaNotificacao(operacao, valor);
         }
