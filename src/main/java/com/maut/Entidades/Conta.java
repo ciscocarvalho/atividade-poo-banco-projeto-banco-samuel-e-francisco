@@ -61,7 +61,7 @@ public class Conta {
             throw new IllegalArgumentException("Valor invalido para saque");
         }
         this.saldo -= valor;
-        contaDestino.saldo += valor;
+        contaDestino.deposita(valor);
         this.enviaNotificacao("Transferência", valor);
     }
 

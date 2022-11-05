@@ -195,7 +195,7 @@ public class App {
                         while (true) {
                             try {
                                 valor = Double.parseDouble(JOptionPane.showInputDialog("Valor:"));
-                                conta.transfere(conta, valor);
+                                conta.transfere(contaDestino, valor);
                                 break;
                             } catch (IllegalArgumentException e) {
                                 JOptionPane.showMessageDialog(null, "Valor invalido para transferencia, voce possui saldo suficiente?");
