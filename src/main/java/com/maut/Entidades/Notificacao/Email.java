@@ -13,7 +13,7 @@ public class Email implements Notificacao {
     private String fromSenha;
     private String fromNome = null;
     private Cliente cliente;
-    private SimpleEmail email;
+    private Session sessaoEmail;
 
     public Email(Cliente cliente, String fromEmail, String fromSenha) {
         this.cliente = cliente;
@@ -27,12 +27,9 @@ public class Email implements Notificacao {
         props.put("mail.smtp.host", "smtp.office365.com");
         props.put("mail.smtp.port", "587");
 
-        Session session = Session.getDefaultInstance(
+        this.sessaoEmail = Session.getDefaultInstance(
             props, new DefaultAuthenticator(this.fromEmail, this.fromSenha)
         );
-
-        this.email = new SimpleEmail();
-        this.email.setMailSession(session);
     }
 
     public Email(Cliente cliente, String email, String senha, String nome) {
@@ -44,7 +41,8 @@ public class Email implements Notificacao {
         String destinatario = this.cliente.getEmail();
         String assunto = operacao;
         String mensagem = "A operação foi realizada com valor: " + valor;
-
+        SimpleEmail email = new SimpleEmail();
+        email.setMailSession(this.sessaoEmail);
         email.setSubject(assunto);
 
         try {
