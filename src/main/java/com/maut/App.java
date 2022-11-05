@@ -173,8 +173,8 @@ public class App {
                     conta.deposita(valor);
                     break;
                 case "Transferir":
-                    numeroAgencia = Integer.parseInt(JOptionPane.showInputDialog("Numero de Agência"));
                     numeroConta = Integer.parseInt(JOptionPane.showInputDialog("Numero de Conta"));
+                    numeroAgencia = Integer.parseInt(JOptionPane.showInputDialog("Numero de Agência"));
 
                     Conta contaDestino = null;
 
