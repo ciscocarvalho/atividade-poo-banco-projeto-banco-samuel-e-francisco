@@ -23,11 +23,11 @@ public class Poupanca extends Conta {
 
     @Override
     public void transfere(Conta contaDestino, double valor) throws IllegalArgumentException {
-        if (!this.podeRetirar(valor)) {
+        double valorComAcrescimo = valor + valor * taxaTransferencia;
+        if (!this.podeRetirar(valorComAcrescimo)) {
             throw new IllegalArgumentException("Valor invalido para saque");
         }
-        this.saldo -= valor;
-        valor -= valor * taxaTransferencia;
+        this.saldo -= valorComAcrescimo;
         contaDestino.deposita(valor);
         this.enviaNotificacao("Transferência", valor);
     }
